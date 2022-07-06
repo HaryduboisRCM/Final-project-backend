@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const eventSchema = mongoose.Schema({
+const profileSchema = mongoose.Schema({
   userName: String,
   courseTitle: String,
   fullName: String,
@@ -14,4 +14,4 @@ const eventSchema = mongoose.Schema({
   portfolio: String
 })
 
-module.exports.Event = mongoose.model('Event', eventSchema, 'graduateprofiles') 
+module.exports.Profile = mongoose.model('Profile', profileSchema, 'graduateprofiles') 
