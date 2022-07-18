@@ -9,6 +9,7 @@ const port = process.env.PORT || 3001;
 const { Profile } = require('../models/profile');
 const { User } = require('../models/user');
 const { v4: uuidv4} = require('uuid');
+const { request } = require('express');
 
 mongoose.connect("mongodb+srv://Tom:password11@cluster0.ex92r1w.mongodb.net/finalproject?retryWrites=true&w=majority") 
 
@@ -32,7 +33,18 @@ app.use(morgan('combined'));
 // express reads top from bottom
 // need to protect the crud operations
 
-
+    // Allow a user to insert an image of themsleves
+  //   var multer = require('multer');
+  
+  //   var storage = multer.diskStorage({
+  //     destination: (req, file, cb) => {
+  //         cb(null, 'uploads')
+  //     },
+  //     filename: (req, file, cb) => {
+  //         cb(null, file.fieldname + '-' + Date.now())
+  //     }
+  // });
+  
 
 app.post('/auth', async (req,res) => {  
   const user = await User.findOne ({userName: req.body.userName}); 
@@ -64,16 +76,15 @@ app.use( async (req,res,next) => {
 
 
 // defining CRUD operations
- app.get('/', async (req, res) => {
+app.get('/', async (req, res) => {
    res.send(await Profile.find());
  });
 
-//filter by event name
-// app.sort('/:eventLocation', async (req, res) => {
-//   await Event.filter({ eventLocation: ObjectId(req.params.eventName, req.params.eventLocation, req.params.eventDetails, req.params.price) })
-//   res.send({ message: 'Events Filtered by Location.' });
+//filter by graduate skills
+// app.get('/:skills', async (req, res, next) => {
+//   await Profile.filter({ skills: (req.params.skills)}, req.body )
+//   res.send({ message: 'Graduates Filtered by Skills.' });
 // });
-
 
 // exports.sort = function (req, res, next) {
 //   const bookitem = booklist.filter((book) => book.type == req.params.type)
@@ -85,6 +96,7 @@ app.use( async (req,res,next) => {
 
 // create new Profile
 app.post('/', async (req, res) => {
+  console.log(req.body)
   const newProfile = req.body;
   const profile = new Profile(newProfile);
   await profile.save();

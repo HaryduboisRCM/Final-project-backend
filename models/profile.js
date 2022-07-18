@@ -11,7 +11,11 @@ const profileSchema = mongoose.Schema({
   skills: String,
   linkedIn: String,
   gitHub: String,
-  portfolio: String
+  portfolio: String,
+  employed: Boolean,
+  image: String,
+  cv: String
+
 })
 
 module.exports.Profile = mongoose.model('Profile', profileSchema, 'graduateprofiles') 
