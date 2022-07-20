@@ -14,7 +14,8 @@ const profileSchema = mongoose.Schema({
   portfolio: String,
   employed: Boolean,
   image: String,
-  cv: String
+  cv: String,
+  accessLevel: String
 
 })
 
