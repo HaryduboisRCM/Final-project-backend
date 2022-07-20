@@ -58,7 +58,7 @@ app.post('/auth', async (req,res) => {
 
   user.token = uuidv4();
   await user.save();
-  res.send({token: user.token, role: user.roles});
+  res.send({token: user.token, roles: user.roles});
 })
 
 
