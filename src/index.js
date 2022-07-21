@@ -9,7 +9,7 @@ const port = process.env.PORT || 3001;
 const { Profile } = require('../models/profile');
 const { User } = require('../models/user');
 const { v4: uuidv4} = require('uuid');
-const { request } = require('express');
+
 
 mongoose.connect("mongodb+srv://Tom:password11@cluster0.ex92r1w.mongodb.net/finalproject?retryWrites=true&w=majority") 
 
@@ -80,6 +80,11 @@ app.get('/', async (req, res) => {
    res.send(await Profile.find());
  });
 
+ // get profile by user ID
+app.get('/id', async (req, res) => {
+  res.send(await Profile.find({ _id: ObjectId(req.params.id)}, req.body));
+});
+
 //filter by graduate skills
 // app.get('/:skills', async (req, res, next) => {
 //   await Profile.filter({ skills: (req.params.skills)}, req.body )
@@ -104,7 +109,7 @@ app.post('/', async (req, res) => {
 });
 
 
-// deletes an Profile
+// deletes a Profile
 app.delete('/:id', async (req, res) => {
   await Profile.deleteOne({ _id: ObjectId(req.params.id) })
   res.send({ message: 'Profile removed.' });

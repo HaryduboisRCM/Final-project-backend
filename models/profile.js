@@ -14,8 +14,8 @@ const profileSchema = mongoose.Schema({
   portfolio: String,
   employed: Boolean,
   image: String,
-  cv: String,
-  token: String,
+  cv: String
+
 })
 
 module.exports.Profile = mongoose.model('Profile', profileSchema, 'graduateprofiles') 
