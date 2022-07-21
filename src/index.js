@@ -81,9 +81,9 @@ app.get('/', async (req, res) => {
  });
 
  // get profile by user ID
-app.get('/id', async (req, res) => {
-  res.send(await  Profile.find({ _id: ObjectId(req.params.id)}, req.body));
-});
+// app.get('/id', async (req, res) => {
+//   res.send(await  Profile.find({ _id: ObjectId(req.params.id)}, req.body));
+// });
 
 //filter by graduate skills
 // app.get('/:skills', async (req, res, next) => {
