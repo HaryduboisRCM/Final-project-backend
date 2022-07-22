@@ -6,7 +6,6 @@ const morgan = require('morgan');
 const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 const port = process.env.PORT || 3001; 
-const { Profile } = require('../models/profile');
 const { User } = require('../models/user');
 const { v4: uuidv4} = require('uuid');
 
@@ -77,17 +76,18 @@ app.use( async (req,res,next) => {
 
 // defining CRUD operations
 app.get('/', async (req, res) => {
-   res.send(await Profile.find());
+   res.send(await User.find());
  });
 
- // get profile by user ID
-// app.get('/id', async (req, res) => {
-//   res.send(await  Profile.find({ _id: ObjectId(req.params.id)}, req.body));
-// });
+//  get User by user ID
+app.get('/id/:id', async (req, res) => {
+  console.log(req.param.id)
+  res.send(await User.findOne({ token: req.params.id}));
+});
 
 //filter by graduate skills
 // app.get('/:skills', async (req, res, next) => {
-//   await Profile.filter({ skills: (req.params.skills)}, req.body )
+//   await User.filter({ skills: (req.params.skills)}, req.body )
 //   res.send({ message: 'Graduates Filtered by Skills.' });
 // });
 
@@ -99,27 +99,27 @@ app.get('/', async (req, res) => {
 //   res.send(bookitem)
 // }
 
-// create new Profile
+// create new User
 app.post('/', async (req, res) => {
   console.log(req.body)
-  const newProfile = req.body;
-  const profile = new Profile(newProfile);
-  await profile.save();
-  res.send({ message: 'New Profile inserted.' });
+  const newUser = req.body;
+  const user = new User(newUser);
+  await user.save();
+  res.send({ message: 'New User inserted.' });
 });
 
 
-// deletes a Profile
+// deletes a User
 app.delete('/:id', async (req, res) => {
-  await Profile.deleteOne({ _id: ObjectId(req.params.id) })
-  res.send({ message: 'Profile removed.' });
+  await User.deleteOne({ _id: ObjectId(req.params.id) })
+  res.send({ message: 'User removed.' });
 });
 
 
-// update an Profile
+// update an User
 app.put('/:id', async (req, res) => {
-  await Profile.findOneAndUpdate({ _id: ObjectId(req.params.id)}, req.body )
-  res.send({ message: 'Profile updated.' });
+  await User.findOneAndUpdate({ _id: ObjectId(req.params.id)}, req.body )
+  res.send({ message: 'User updated.' });
 });
 
 
