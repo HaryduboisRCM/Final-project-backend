@@ -85,6 +85,12 @@ app.get('/id/:id', async (req, res) => {
   res.send(await User.findOne({ token: req.params.id}));
 });
 
+//  get User by employed status
+app.get('/employed/:employed', async (req, res) => {
+  console.log(req.param.employed)
+  res.send(await User.find({ employed: req.params.employed}));
+});
+
 //filter by graduate skills
 // app.get('/:skills', async (req, res, next) => {
 //   await User.filter({ skills: (req.params.skills)}, req.body )
