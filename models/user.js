@@ -15,7 +15,7 @@ const userSchema = mongoose.Schema({
   linkedIn: String,
   gitHub: String,
   portfolio: String,
-  employed: Boolean,
+  employed: String,
   image: String,
   cv: String
 })
